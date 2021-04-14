@@ -1,4 +1,4 @@
-package cc.caker.util;
+package cc.caker.leetcode.util;
 
 import java.util.Random;
 
