@@ -1,0 +1,101 @@
+Index: src/main/java/cc/caker/leetcode/problems/RegularExpressionMatching.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/cc/caker/leetcode/problems/RegularExpressionMatching.java b/src/main/java/cc/caker/leetcode/problems/RegularExpressionMatching.java
+--- a/src/main/java/cc/caker/leetcode/problems/RegularExpressionMatching.java	(date 1619355269284)
++++ b/src/main/java/cc/caker/leetcode/problems/RegularExpressionMatching.java	(date 1619355269284)
+@@ -23,77 +23,16 @@
+      * @return
+      */
+     public static boolean isMatch(String s, String p) {
+-        if (p.length() == 0) {
+-            System.out.printf("\ns = %s, p = %s, result = ", s, p);
++        if (s.length() == 0 || p.length() == 0) {
+             return false;
+         }
+-        if (p.equals(".*")) {
+-            System.out.printf("\ns = %s, p = %s, result = ", s, p);
+-            return true;
+-        }
+-        int i = 0, j = 0;
+-        char pCheck = ' ';
+-        while (i < s.length() && j < p.length()) {
+-            char sCh = s.charAt(i);
+-            char pCh = p.charAt(j);
+-
+-            if (sCh == pCh || pCh == '.') {
+-                pCheck = pCh;
+-                i++;
+-                j++;
+-            } else if (j + 1 < p.length() && p.charAt(j + 1) == '*') {
+-                j += 2;
+-            } else if (pCh == '*') {
+-                if (pCheck == s.charAt(i)) {
+-                    while (i < s.length() && s.charAt(i) == s.charAt(i - 1)) {
+-                        i++;
+-                    }
+-                    j++;
+-                } else if (pCheck == '.') {
+-                    while (j < p.length()) {
+-                        if (p.charAt(j) >= 'a' && p.charAt(j) <= 'z') {
+-                            break;
+-                        }
+-                        j++;
+-                    }
+-                    if (j >= p.length()) {
+-                        System.out.printf("\ns = %s, p = %s, result = ", s, p);
+-                        return true;
+-                    }
+-                    while (i < s.length() && p.charAt(j) != s.charAt(i)) {
+-                        i++;
+-                    }
+-                    if (i >= s.length()) {
+-                        System.out.printf("\ns = %s, p = %s, result = ", s, p);
+-                        return false;
+-                    }
+-                } else {
+-                    System.out.printf("\ns = %s, p = %s, result = ", s, p);
+-                    return false;
+-                }
+-            } else {
+-                System.out.printf("\ns = %s, p = %s, result = ", s, p);
+-                return false;
+-            }
+-        }
+-
+-        if(i < s.length()) {
+-            System.out.printf("\ns = %s, p = %s, result = ", s, p);
+-            return false;
+-        }
+-
+-        if(j < p.length()) {
+-            while (j < p.length()) {
+-                if(p.charAt(j) >= 'a' && p.charAt(j) <= 'z') {
+-                    System.out.printf("\ns = %s, p = %s, result = ", s, p);
+-                    return false;
+-                }
+-                j++;
+-            }
+-        }
+-
+-        System.out.printf("\ns = %s, p = %s, result = ", s, p);
+-        return true;
++        // 完全匹配
++        if(!p.contains(".") && !p.contains("*") && !p.equals(s)) {
++            return false;
++        }
++
++        
++        return false;
+     }
+ 
+     public static void main(String[] args) {
+@@ -112,5 +51,6 @@
+         System.out.println(isMatch("ab", ".*c"));
+         System.out.println(isMatch("aaaa", "aaa"));
+         System.out.println(isMatch("aaa", "aaaa"));
++        System.out.println(isMatch("aaaaa", "a*a"));
+     }
+ }
