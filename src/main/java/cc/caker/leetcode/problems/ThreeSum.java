@@ -1,15 +1,13 @@
 package cc.caker.leetcode.problems;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * 15. 三数之和
@@ -37,38 +35,31 @@ public class ThreeSum {
             return Collections.emptyList();
         }
 
-        Set<String> duplicateKey = new HashSet<>();
-        Set<Integer> duplicateNum = new HashSet<>();
+        Set<String> duplicateKey = new HashSet<>(length);
         List<List<Integer>> result = new ArrayList<>(length);
-        for (int i = 0; i < length; i++) {
-            Map<Integer, Integer> map = new HashMap<>();
-            int c = nums[i];
+        Arrays.sort(nums);
+        Map<Integer, Integer> map = new HashMap<>(length);
+        for (int i = 0; i < length - 2 && nums[i] <= 0; i++) {
             // 重复的数过滤掉
-            if (duplicateNum.contains(c)) {
+            if (i - 1 >= 0 && nums[i] == nums[i - 1]) {
                 continue;
-            } else {
-                duplicateNum.add(c);
             }
-            for (int j = 0; j < length; j++) {
-                if (j == i) {
-                    continue;
-                }
-                int a = nums[j];
-                if (map.get(a) != null) {
-                    int b = map.get(a);
-                    String key = Stream.of(a, b, c).sorted()
-                            .map(Objects::toString).collect(Collectors.joining("_"));
+            map.clear();
+            for (int j = i + 1; j < length; j++) {
+                Integer b = map.get(nums[j]);
+                if (b != null) {
+                    String key = nums[i] + "_" + b + "_" + nums[j];
                     // 重复的结果过滤掉
                     if (!duplicateKey.contains(key)) {
                         List<Integer> integerList = new ArrayList<>(3);
-                        integerList.add(a);
+                        integerList.add(nums[i]);
                         integerList.add(b);
-                        integerList.add(c);
+                        integerList.add(nums[j]);
                         result.add(integerList);
                         duplicateKey.add(key);
                     }
                 } else {
-                    map.put(-c - a, a);
+                    map.put(-nums[i] - nums[j], nums[j]);
                 }
             }
         }
