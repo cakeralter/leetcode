@@ -39,7 +39,7 @@ public class MaximumXorOfTwoNumbersInAnArray {
         for (int num : nums) {
             TrieNode currentNode = tree;
             for (int j = INT_MAX_BIT_LENGTH - 1; j >= 0; j--) {
-                int bit = num >> j & 1;
+                byte bit = (byte) (num >> j & 1);
                 boolean exist = false;
                 for (TrieNode child : currentNode.children) {
                     if ((child.value ^ bit) == 1) {
@@ -67,7 +67,7 @@ public class MaximumXorOfTwoNumbersInAnArray {
      */
     static class TrieNode {
 
-        private int value;
+        private byte value;
         private final List<TrieNode> children;
         private int total = -1;
 
@@ -75,7 +75,7 @@ public class MaximumXorOfTwoNumbersInAnArray {
             this.children = new ArrayList<>();
         }
 
-        public TrieNode(int value) {
+        public TrieNode(byte value) {
             this();
             this.value = value;
         }
@@ -89,7 +89,7 @@ public class MaximumXorOfTwoNumbersInAnArray {
             TrieNode currentNode = this;
             // 搜索插入位置
             for (int i = INT_MAX_BIT_LENGTH - 1; i >= 0; i--) {
-                int bit = value >> i & 1;
+                byte bit = (byte) (value >> i & 1);
                 boolean exists = false;
                 for (TrieNode child : currentNode.children) {
                     if (child.value == bit) {
