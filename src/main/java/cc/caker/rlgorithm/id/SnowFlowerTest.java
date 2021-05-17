@@ -1,4 +1,4 @@
-package cc.caker.leetcode.rlgorithm.id;
+package cc.caker.rlgorithm.id;
 
 import java.util.Collections;
 import java.util.HashSet;

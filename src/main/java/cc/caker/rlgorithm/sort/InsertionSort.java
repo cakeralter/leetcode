@@ -1,4 +1,4 @@
-package cc.caker.leetcode.rlgorithm.sort;
+package cc.caker.rlgorithm.sort;
 
 /**
  * 插入排序
