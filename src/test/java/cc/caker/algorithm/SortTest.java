@@ -1,12 +1,12 @@
-package cc.caker.leetcode.algorithm;
+package cc.caker.algorithm;
 
 import cc.caker.common.util.ArrayUtils;
-import cc.caker.rlgorithm.sort.BubbleSort;
-import cc.caker.rlgorithm.sort.InsertionSort;
-import cc.caker.rlgorithm.sort.MergeSort;
-import cc.caker.rlgorithm.sort.QuickSort;
-import cc.caker.rlgorithm.sort.SelectionSort;
-import cc.caker.rlgorithm.sort.ShellSort;
+import cc.caker.algorithm.sort.BubbleSort;
+import cc.caker.algorithm.sort.InsertionSort;
+import cc.caker.algorithm.sort.MergeSort;
+import cc.caker.algorithm.sort.QuickSort;
+import cc.caker.algorithm.sort.SelectionSort;
+import cc.caker.algorithm.sort.ShellSort;
 import org.junit.Test;
 
 import java.util.Arrays;

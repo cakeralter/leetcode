@@ -1,4 +1,4 @@
-package cc.caker.rlgorithm.sort;
+package cc.caker.algorithm.sort;
 
 /**
  * 插入排序

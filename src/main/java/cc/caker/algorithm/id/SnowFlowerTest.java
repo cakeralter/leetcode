@@ -1,4 +1,4 @@
-package cc.caker.rlgorithm.id;
+package cc.caker.algorithm.id;
 
 import java.util.Collections;
 import java.util.HashSet;
