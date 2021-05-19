@@ -27,7 +27,9 @@ public class FindKthLargestXorCoordinateValue {
         if (matrix.length == 1 && matrix[0].length == 1) {
             return matrix[0][0];
         }
+
         int[][] xors = new int[matrix.length][matrix[0].length];
+        int[] array = new int[xors.length * xors[0].length];
         for (int i = 0; i < matrix.length; i++) {
             int xor = matrix[i][0];
             for (int j = 0; j < matrix[0].length; j++) {
@@ -41,17 +43,12 @@ public class FindKthLargestXorCoordinateValue {
                     xor ^= matrix[i][j];
                     xors[i][j] = xor ^ xors[i - 1][j];
                 }
+                array[i * xors[0].length + j] = xors[i][j];
             }
         }
 
         // 排序
         // TODO perf: 小顶堆求第K大的数
-        int[] array = new int[xors.length * xors[0].length];
-        for (int i = 0; i < xors.length; i++) {
-            for (int j = 0; j < xors[0].length; j++) {
-                array[i * xors[0].length + j] = xors[i][j];
-            }
-        }
         Arrays.sort(array);
         return array[array.length - k];
     }
