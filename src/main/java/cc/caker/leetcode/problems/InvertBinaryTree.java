@@ -22,24 +22,15 @@ public class InvertBinaryTree {
      * @return
      */
     public static TreeNode invertTree(TreeNode root) {
-        invert(root);
-        return root;
-    }
-
-    /**
-     * invert
-     *
-     * @param root
-     */
-    private static void invert(TreeNode root) {
         if (root == null) {
-            return;
+            return null;
         }
         TreeNode leftNode = root.left;
         root.left = root.right;
         root.right = leftNode;
-        invert(root.left);
-        invert(root.right);
+        invertTree(root.left);
+        invertTree(root.right);
+        return root;
     }
 
     @NoArgsConstructor
