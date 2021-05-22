@@ -55,13 +55,13 @@ public class TopKFrequentWords {
     }
 
     public static void main(String[] args) {
-        PrintUtils.printList(topKFrequent(new String[]{
+        PrintUtils.print(topKFrequent(new String[]{
                 "i", "love", "leetcode", "i", "love", "coding"
         }, 2));
-        PrintUtils.printList(topKFrequent(new String[]{
+        PrintUtils.print(topKFrequent(new String[]{
                 "the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"
         }, 4));
-        PrintUtils.printList(topKFrequent(new String[]{
+        PrintUtils.print(topKFrequent(new String[]{
                 "i", "love", "leetcode", "i", "love", "coding"
         }, 3));
     }
