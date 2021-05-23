@@ -2,6 +2,7 @@ package cc.caker.common.util;
 
 import cc.caker.leetcode.model.ListNode;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -12,7 +13,17 @@ import java.util.List;
 public interface PrintUtils {
 
     /**
-     * printList
+     * print Array
+     *
+     * @param array
+     * @param <T>
+     */
+    static <T> void print(T[] array) {
+        System.out.println(Arrays.toString(array));
+    }
+
+    /**
+     * print List
      *
      * @param list
      * @param <T>
@@ -24,7 +35,7 @@ public interface PrintUtils {
     }
 
     /**
-     * print
+     * print ListNode
      *
      * @param head
      */
