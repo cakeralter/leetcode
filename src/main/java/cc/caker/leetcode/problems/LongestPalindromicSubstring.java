@@ -13,25 +13,21 @@ public class LongestPalindromicSubstring {
 
     /**
      * longestPalindrome
-     * TODO 动态规划优化
      *
      * @param s
      * @return
+     * @see https://mp.weixin.qq.com/s?__biz=MzAxODQxMDM0Mw==&mid=2247484471&idx=1&sn=7c26d04a1f035770920d31377a1ebd42&chksm=9bd7fa3faca07329189e9e8b51e1a665166946b66b8e8978299ba96d5f2c0d3eafa7db08b681&scene=21#wechat_redirect
      */
     public static String longestPalindrome(String s) {
-        int length = s.length();
         String longest = "";
-        int longestLength = 0;
-        for (int i = 0; i < length; i++) {
-            for (int j = i + longestLength; j < length; j++) {
-                String substring = s.substring(i, j + 1);
-                if (isPalindrome(substring)) {
-                    longest = substring;
-                    longestLength = longest.length();
-                }
-                if (longestLength > length / 2 && i > length / 2) {
-                    break;
-                }
+        for (int i = 0; i < s.length(); i++) {
+            String s1 = palindrome(s, i, i);
+            String s2 = palindrome(s, i, i + 1);
+            if (longest.length() < s1.length()) {
+                longest = s1;
+            }
+            if (longest.length() < s2.length()) {
+                longest = s2;
             }
         }
         return longest;
@@ -43,14 +39,12 @@ public class LongestPalindromicSubstring {
      * @param s
      * @return
      */
-    public static boolean isPalindrome(String s) {
-        int length = s.length();
-        for (int i = 0; i < length / 2; i++) {
-            if (s.charAt(i) != s.charAt(length - 1 - i)) {
-                return false;
-            }
+    public static String palindrome(String s, int l, int r) {
+        while (l >= 0 && r < s.length() && s.charAt(l) == s.charAt(r)) {
+            l--;
+            r++;
         }
-        return true;
+        return s.substring(l + 1, r);
     }
 
     public static void main(String[] args) {
@@ -63,10 +57,5 @@ public class LongestPalindromicSubstring {
         System.out.println(longestPalindrome("ccc"));
         System.out.println(longestPalindrome("eccsaabccbaeeead"));
         System.out.println(longestPalindrome("miycvxmqggnmmcwlmizfojwrurwhwygwfykyefxbgveixykdebenzitqnciigfjgrzzbtgeazyrbiirmejhdwcgjzwqolrturjlqpsgunuqerqjevbheblmbvgxyedxshswsokbhzapfuojgyfhctlaifrisgzqlczageirnukgnmnbwogknyyuynwsuwbumdmoqwxprykmazghcpmkdcjduepjmjdxrhvixxbfvhybjdpvwjbarmbqypsylgtzyuiqkexgvirzylydrhrmuwpmfkvqllqvekyojoacvyrzjevaupypfrdguhukzuqojolvycgpjaendfetkgtojepelhcltorueawwjpltehbbjrvznxhahtuaeuairvuklctuhcyzomwrrznrcqmovanxmiyilefybkbveesrxkmqrqkowyrimuejqtikcjfhizsmumajbqglxrvevexnleflocxoqgoyrzgqflwiknntdcykuvdcpzlakljidclhkllftxpinpvbngtexngdtntunzgahuvfnqjedcafzouopiixw"));
-
-        System.out.println(isPalindrome("abccba"));
-        System.out.println(isPalindrome("aa"));
-        System.out.println(isPalindrome("a"));
-        System.out.println(isPalindrome("aba"));
     }
 }
