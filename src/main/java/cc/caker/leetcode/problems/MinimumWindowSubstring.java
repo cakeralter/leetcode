@@ -26,46 +26,46 @@ public class MinimumWindowSubstring {
      * @return
      */
     public static String minWindow(String s, String t) {
-        Map<Character, Integer> need = new HashMap<>(t.length()),
-                window = new HashMap<>(t.length());
+        Map<Character, Integer> need = new HashMap<>(t.length()), window = new HashMap<>(t.length());
         for (char c : t.toCharArray()) {
             Integer count = need.getOrDefault(c, 0);
-            need.put(c, ++count);
+            need.put(c, count + 1);
         }
+
         int left = 0, right = 0;
-        int valid = 0, start = 0, minLen = Integer.MAX_VALUE;
+        int valid = 0, start = 0, len = Integer.MAX_VALUE;
 
         while (right < s.length()) {
-            char rC = s.charAt(right++);
-            if (need.containsKey(rC)) {
-                Integer count = window.getOrDefault(rC, 0);
-                window.put(rC, ++count);
-
-                if (Objects.equals(window.get(rC), need.get(rC))) {
+            char cR = s.charAt(right++);
+            if (need.containsKey(cR)) {
+                Integer count = window.getOrDefault(cR, 0);
+                count++;
+                window.put(cR, count);
+                if (Objects.equals(count, need.get(cR))) {
                     valid++;
                 }
             }
 
             System.out.printf("window[%d, %d)\n", left, right);
 
+            // 缩小窗口
             while (valid == need.size()) {
-                if (right - left < minLen) {
-                    minLen = right - left;
+                if (right - left < len) {
+                    len = right - left;
                     start = left;
                 }
-                // 缩小窗口
-                char lC = s.charAt(left++);
-                if (need.containsKey(lC)) {
-                    Integer count = window.get(lC);
-                    if (Objects.equals(count, need.get(lC))) {
+                char cL = s.charAt(left++);
+                if (need.containsKey(cL)) {
+                    Integer count = window.get(cL);
+                    if (Objects.equals(count, need.get(cL))) {
                         valid--;
                     }
-                    window.put(lC, --count);
+                    window.put(cL, count - 1);
                 }
             }
         }
 
-        return minLen == Integer.MAX_VALUE ? "" : s.substring(start, start + minLen);
+        return len == Integer.MAX_VALUE ? "" : s.substring(start, start + len);
     }
 
     public static void main(String[] args) {
